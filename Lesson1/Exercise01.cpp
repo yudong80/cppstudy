@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <sstream>
 
+//연습문제1: 동적 크기 배열 구현하기
+
 template <typename T>
 class dynamic_array
 {
