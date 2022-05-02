@@ -1,26 +1,26 @@
-template<typename Type, typename ...Args> class Singleton{
+template<typename Type> class Singleton{
 protected:
-    Singleton(Args...args) {}
+    Singleton() = default;
 private:
     Singleton(const Singleton&) = delete;
     Singleton& operator=(const Singleton&) = delete;
 public:
-    static Type& getInstance(int x, int y) {
-        static Type instance(x, y);
+    template<typename... Args>
+    static Type& getInstance(Args&&... args) {
+        static Type instance(args...);
         return instance;
     }
 };
+class Mouse : public Singleton<Mouse> {
+public:
+    Mouse() {}
+};
 class Cursor : public Singleton<Cursor> {
 public:
-    Cursor(int x, int y): Singleton(x, y) {}
+    Cursor(int x, int y) {}
 };
 
 int main() {
+    Mouse& m = Mouse::getInstance();
     Cursor& c = Cursor::getInstance(1, 2);
-    //Mouse& c = Mouse::getInstance();
 }
-
-// class Mouse : public Singleton<Mouse> {
-// public:
-//     Mouse() {}
-// };

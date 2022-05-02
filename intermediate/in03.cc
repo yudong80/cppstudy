@@ -21,14 +21,14 @@ public:
         this->name = p.name;
         return *this;
     }
-    People(People &&p) : name(p.name), addr(p.addr), age(p.age) {
+    People(People &&p) : name(move(p.name)), addr(move(p.addr)), age(move(p.age)) {
         cout << "move constructor" << endl;
     }
     People& operator=(People &&p) {
         cout << "move assignment operator" << endl;
-        name = p.name;
-        addr = p.addr;
-        age = p.age;
+        name = move(p.name);
+        addr = move(p.addr);
+        age = move(p.age);
         return *this;
     }
 };
